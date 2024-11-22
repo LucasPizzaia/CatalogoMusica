@@ -1,8 +1,8 @@
 // models/albumModel.js
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
-const Artist = require('./artistModel');
-const Genre = require('./genreModel');
+const Artist = require('./artistModel');  // Importação do modelo Artist
+const Genre = require('./genreModel');   // Importação do modelo Genre
 
 const Album = sequelize.define('Album', {
   title: {
@@ -19,7 +19,9 @@ const Album = sequelize.define('Album', {
   },
 });
 
+// Associações
 Album.belongsTo(Artist, { foreignKey: 'artistId', as: 'artist' });
 Album.belongsToMany(Genre, { through: 'AlbumGenres', as: 'genres' });
+Genre.belongsToMany(Album, { through: 'AlbumGenres', as: 'albums' });
 
 module.exports = Album;
