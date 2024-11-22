@@ -1,0 +1,32 @@
+<%- include("layout") %>
+<h2>Artists</h2>
+<a href="/">Back to Home</a>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Genres</th>
+    <th>Discs</th>
+    <th>Actions</th>
+  </tr>
+  <% artists.forEach(artist => { %>
+    <tr>
+      <td><%= artist.name %></td>
+      <td>
+        <% artist.Genres.forEach(genre => { %>
+          <%= genre.name %> 
+        <% }) %>
+      </td>
+      <td>
+        <% artist.Albums.forEach(album => { %>
+          <%= album.title %> 
+        <% }) %>
+      </td>
+      <td>
+        <a href="/artists/edit/<%= artist.id %>">Edit</a> |
+        <form method="POST" action="/artists/delete/<%= artist.id %>" style="display: inline;">
+          <button type="submit">Delete</button>
+        </form>
+      </td>
+    </tr>
+  <% }) %>
+</table>
